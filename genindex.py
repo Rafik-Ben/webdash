@@ -1,15 +1,25 @@
 '''genindex.py'''
-#base data
+import pickle
+## base data
+file='test.data'
 inet={'img':'img/internet.png',  'head':'Internet',    'text':'Ping: _val_ ms'}
 elec={'img':'img/voltage.png',   'head':'Electricity', 'text':'Voltage: _val_ V'}
-hwat={'img':'img/hotwater.png',  'head':'Hot water',   'text':'Temperature: _val_ C'}
+hwat={'img':'img/hotwater.png',  'head':'Hot water',   'text':'Temperature: _val_ &deg;C'}
 cwat={'img':'img/coldwater.png', 'head':'Cold water',  'text':'Pressure: _val_ Atm'}
 cam1={'img':'img/camera.png',    'head':'Camera',      'text':'Status: _val_'}
 
 def getdata():
-	## TODO: get real values
+	## test data start
 	testdata={'inet':'20', 'volt':'200', 'hwat':'50', 'cwat':'3', 'cam1':'ok'}
-	return testdata
+	f=open(file,'wb')
+	pickle.dump(testdata, f)
+	f.close()
+	testdata.clear()
+	## test data end
+	f=open(file,'rb')
+	data=pickle.load(f)
+	f.close()
+	return data
 
 def printhead():
 	print '<html><head><style type="text/css">'
@@ -32,9 +42,13 @@ def printdata(img, head, text, color):
 	print '</tr></table><br>'
 
 
-# Main
+## Main
 data = getdata()
 printhead()
+
+## time
+from datetime import datetime
+print '<p>Updated:', str(datetime.now()), '</p>'
 
 ## inet
 vals=data['inet']
