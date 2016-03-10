@@ -8,7 +8,7 @@ import subprocess
 data = {}
 mqttcid='===CLIENTID==='
 dumpfile='/tmp/sensors.data'
-dumpinterval=60
+dumpinterval=300
 uploadcmd=['ftp-upload', '-h', '===HOST===', '-u', '===USER===', '--password', '===PASSWORD===', '--passive', '-b', dumpfile]
 
 def on_connect(obj, rc):
