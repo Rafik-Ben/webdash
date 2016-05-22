@@ -152,3 +152,8 @@ printtail()
 f=open(olddatafile,'wb')
 pickle.dump(olddata, f)
 f.close()
+## remove used data
+if os.path.isfile(newdatafile):
+	os.remove(newdatafile)
+
+## end
